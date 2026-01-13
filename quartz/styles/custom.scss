@@ -2,17 +2,22 @@
 
 // put your custom CSS here!
 
-// 表格：居中显示，文本左对齐
-table {
-  margin: 1.5rem auto;
+// 表格容器居中
+.table-container {
+  display: flex;
+  justify-content: center;
 
-  th,
-  td {
-    text-align: left;
-  }
+  & > table {
+    margin: 1.5rem 0;
 
-  // 表头居中
-  th {
-    text-align: center;
+    // 表头居中
+    th {
+      text-align: center;
+    }
+
+    // 内容左对齐
+    td {
+      text-align: left;
+    }
   }
 }
