@@ -1,0 +1,33 @@
+image: node:22
+
+variables:
+  GITLAB_PAGES_URL: "zhaohanlin.gitlab.glm.ai/vibe-coding"
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  script:
+    # 动态替换 baseUrl 为 GitLab Pages 地址
+    - sed -i "s|starrylyn.github.io/vibe-coding|$GITLAB_PAGES_URL|g" quartz.config.ts
+    - npm ci
+    - npx quartz build
+  artifacts:
+    paths:
+      - public
+
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages"
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
